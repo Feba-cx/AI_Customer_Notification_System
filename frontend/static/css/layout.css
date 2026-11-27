@@ -1,0 +1,35 @@
+.app{
+    display:flex;
+    min-height:100vh;
+    background:#F8FAFC;
+}
+
+.main-content{
+    flex:1;
+    margin-left:260px;
+    display:flex;
+    flex-direction:column;
+}
+
+.page-content{
+    padding:30px;
+}
+
+.page-title{
+    font-size:30px;
+    font-weight:700;
+    color:#0F172A;
+    margin-bottom:5px;
+}
+
+.page-subtitle{
+    color:#64748B;
+    margin-bottom:30px;
+}
+
+.content-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    margin-top:30px;
+}

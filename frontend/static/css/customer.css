@@ -1,0 +1,49 @@
+.table-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.table-header{
+
+    margin-bottom:20px;
+
+}
+
+.search-input{
+
+    width:320px;
+
+    padding:12px 15px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+}
+
+.table{
+
+    width:100%;
+
+}
+
+.table th{
+
+    color:var(--text-light);
+
+    font-weight:600;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}

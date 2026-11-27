@@ -1,0 +1,332 @@
+{% extends "base_dashboard.html" %}
+
+{% block title %}
+Purchase History
+{% endblock %}
+
+{% block css %}
+
+<style>
+
+    .purchase-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 20px;
+    }
+
+    .purchase-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .purchase-card {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        overflow-x: auto;
+    }
+
+    .purchase-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .purchase-table th {
+        text-align: left;
+        padding: 14px;
+        background: #f8f9fa;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .purchase-table td {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+        white-space: nowrap;
+    }
+
+    .purchase-table tr:hover {
+        background: #fafafa;
+    }
+
+    .amount {
+        font-weight: 600;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        color: #777;
+    }
+
+    @media (max-width: 768px) {
+
+        .purchase-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .purchase-actions {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+<div class="purchase-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Purchase History
+        </h1>
+
+        <p class="page-subtitle">
+            View and manage customer purchase activity.
+        </p>
+
+    </div>
+
+
+    <div class="purchase-actions">
+
+        <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#purchaseImportModal">
+
+            <i class="bi bi-upload"></i>
+
+            Import CSV
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="purchase-card">
+
+    {% if purchases %}
+
+    <table class="purchase-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Customer ID</th>
+
+                <th>Product</th>
+
+                <th>Category</th>
+
+                <th>Purchase Date</th>
+
+                <th>Quantity</th>
+
+                <th>Amount</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for purchase in purchases %}
+
+            <tr>
+
+                <td>
+                    {{ purchase.customer_id }}
+                </td>
+
+                <td>
+                    {{ purchase.product_name }}
+                </td>
+
+                <td>
+                    {{ purchase.category }}
+                </td>
+
+                <td>
+                    {{ purchase.purchase_date }}
+                </td>
+
+                <td>
+                    {{ purchase.quantity }}
+                </td>
+
+                <td class="amount">
+                    ₹{{ "%.2f"|format(purchase.amount) }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <i
+            class="bi bi-cart-x"
+            style="font-size: 40px;">
+        </i>
+
+        <h3>
+            No purchase records yet
+        </h3>
+
+        <p>
+            Import a purchase-history CSV
+            to get started.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- Purchase Import Modal -->
+
+<div
+    class="modal fade"
+    id="purchaseImportModal"
+    tabindex="-1"
+    aria-labelledby="purchaseImportModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form
+                action="{{ url_for('bulk_import_purchases') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="purchaseImportModalLabel">
+
+                        Import Purchase History
+
+                    </h5>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+
+                <div class="modal-body">
+
+                    <p>
+                        Upload a CSV containing purchase
+                        history records.
+                    </p>
+
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Purchase CSV File
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            name="purchase_csv_file"
+                            class="form-control"
+                            accept=".csv"
+                            required>
+
+                    </div>
+
+
+                    <div class="alert alert-info">
+
+                        <strong>
+                            Required columns:
+                        </strong>
+
+                        <br>
+
+                        customer_id,
+                        product_name,
+                        category,
+                        purchase_date,
+                        quantity,
+                        amount
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                        <i class="bi bi-upload"></i>
+
+                        Import Purchases
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+{% endblock %}

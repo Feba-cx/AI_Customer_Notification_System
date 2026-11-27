@@ -1,0 +1,483 @@
+```html
+{% extends "base_dashboard.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="dashboard-header">
+
+    <div>
+
+        <h1 class="page-title">Welcome Back 👋</h1>
+
+        <p class="page-subtitle">
+            Monitor your AI-powered sales notification platform in one place.
+        </p>
+
+    </div>
+
+    <div style="display:flex; gap:12px;">
+
+        <button
+            class="primary-btn"
+            type="button"
+            onclick="generateAINotifications()"
+        >
+
+            <i class="bi bi-stars"></i>
+
+            Generate AI Notifications
+
+        </button>
+
+        <button class="primary-btn" type="button">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Add Customer
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== KPI CARDS ===================== -->
+
+<div class="stats-grid">
+
+    <div class="kpi-card">
+
+        <div class="kpi-top">
+
+            <div class="kpi-icon blue">
+
+                <i class="bi bi-people-fill"></i>
+
+            </div>
+
+            <span class="trend up">
+
+                +12%
+
+            </span>
+
+        </div>
+
+        <h2 id="customerCount">1,254</h2>
+
+        <p>Total Customers</p>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+        <div class="kpi-top">
+
+            <div class="kpi-icon green">
+
+                <i class="bi bi-box-seam"></i>
+
+            </div>
+
+            <span class="trend up">
+
+                +5%
+
+            </span>
+
+        </div>
+
+        <h2>320</h2>
+
+        <p>Total Products</p>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+        <div class="kpi-top">
+
+            <div class="kpi-icon orange">
+
+                <i class="bi bi-send-fill"></i>
+
+            </div>
+
+            <span class="trend">
+
+                Today
+
+            </span>
+
+        </div>
+
+        <h2>8,942</h2>
+
+        <p>Notifications Sent</p>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+        <div class="kpi-top">
+
+            <div class="kpi-icon purple">
+
+                <i class="bi bi-currency-dollar"></i>
+
+            </div>
+
+            <span class="trend up">
+
+                +18%
+
+            </span>
+
+        </div>
+
+        <h2>$25,430</h2>
+
+        <p>Revenue</p>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== AI NOTIFICATION SECTION ===================== -->
+
+<div class="activity-card" style="margin-top:25px;">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+    ">
+
+        <div>
+
+            <h3>AI Sales Notifications</h3>
+
+            <p style="margin-top:5px; opacity:0.7;">
+
+                Generate personalized sales notifications using
+                customer purchase behavior.
+
+            </p>
+
+        </div>
+
+        <i
+            class="bi bi-robot"
+            style="font-size:32px;"
+        ></i>
+
+    </div>
+
+
+    <div id="notificationResult">
+
+        <div class="insight-item">
+
+            🤖 Click <strong>Generate AI Notifications</strong>
+            to analyze customers and create personalized
+            product recommendations.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== CHART + AI INSIGHTS ===================== -->
+
+<div class="dashboard-grid" style="margin-top:25px;">
+
+    <div class="chart-card">
+
+        <h3>Sales Overview</h3>
+
+        <canvas id="salesChart"></canvas>
+
+    </div>
+
+
+    <div class="activity-card">
+
+        <h3>AI Insights</h3>
+
+        <div class="insight-item">
+
+            🤖 AI predicts a <strong>91%</strong>
+            purchase probability for premium customers.
+
+        </div>
+
+        <div class="insight-item">
+
+            📧 Email campaigns perform
+            <strong>27%</strong> better than SMS campaigns.
+
+        </div>
+
+        <div class="insight-item">
+
+            ⭐ <strong>Wireless Headphones</strong>
+            are currently the best-selling product.
+
+        </div>
+
+        <div class="insight-item">
+
+            📈 Returning customers generated the
+            highest revenue this week.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== SECOND ROW ===================== -->
+
+<div class="dashboard-grid" style="margin-top:25px;">
+
+    <div class="chart-card">
+
+        <h3>Notification Performance</h3>
+
+        <canvas id="notificationChart"></canvas>
+
+    </div>
+
+
+    <div class="activity-card">
+
+        <h3>Recent Activity</h3>
+
+        <div class="insight-item">
+
+            📨 Promotional email sent to
+            420 customers.
+
+        </div>
+
+        <div class="insight-item">
+
+            👤 New customer "John Smith" added.
+
+        </div>
+
+        <div class="insight-item">
+
+            📦 Product inventory updated.
+
+        </div>
+
+        <div class="insight-item">
+
+            🤖 AI generated personalized
+            campaign messages.
+
+        </div>
+
+        <div class="insight-item">
+
+            📊 Sales prediction model executed
+            successfully.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+
+<script>
+
+async function generateAINotifications() {
+
+    const resultDiv =
+        document.getElementById("notificationResult");
+
+    resultDiv.innerHTML = `
+        <div class="insight-item">
+            🤖 Generating AI notifications...
+            Please wait.
+        </div>
+    `;
+
+    try {
+
+        const response = await fetch(
+            "/notifications/generate"
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned " + response.status
+            );
+
+        }
+
+        const data = await response.json();
+
+
+        if (!data.success) {
+
+            resultDiv.innerHTML = `
+                <div class="insight-item">
+                    ❌ Failed to generate notifications.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        let html = `
+
+            <div class="insight-item">
+
+                ✅ <strong>
+                    ${data.count}
+                    AI notifications generated.
+                </strong>
+
+            </div>
+
+        `;
+
+
+        data.notifications.forEach(
+            notification => {
+
+                const probability =
+                    (
+                        notification.purchase_probability
+                        * 100
+                    ).toFixed(2);
+
+
+                html += `
+
+                    <div
+                        class="insight-item"
+                        style="margin-top:12px;"
+                    >
+
+                        <div style="
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:center;
+                            margin-bottom:8px;
+                        ">
+
+                            <strong>
+
+                                👤
+                                ${notification.customer_name}
+
+                            </strong>
+
+                            <span>
+
+                                ${notification.purchase_intent}
+
+                            </span>
+
+                        </div>
+
+
+                        <p style="margin:8px 0;">
+
+                            ${notification.message}
+
+                        </p>
+
+
+                        <small>
+
+                            🤖 Purchase probability:
+                            <strong>
+                                ${probability}%
+                            </strong>
+
+                            &nbsp; | &nbsp;
+
+                            ⭐ Recommended:
+                            <strong>
+                                ${notification.recommended_product}
+                            </strong>
+
+                            &nbsp; | &nbsp;
+
+                            ₹${notification.price}
+
+                        </small>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        resultDiv.innerHTML = html;
+
+
+    } catch (error) {
+
+        console.error(
+            "AI Notification Error:",
+            error
+        );
+
+
+        resultDiv.innerHTML = `
+
+            <div class="insight-item">
+
+                ❌ Unable to generate notifications.
+
+                <br>
+
+                <small>
+                    Check that the Flask backend
+                    is running.
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+</script>
+
+{% endblock %}
+```

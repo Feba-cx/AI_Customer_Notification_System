@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
+
+{% block page_css %}{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+   <aside class="sidebar">
+
+    <div class="sidebar-top">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <i class="bi bi-bell-fill"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                <h2>NotifyAI</h2>
+
+                <span>Sales Intelligence</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard" class="active">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+
+            <a href="customers">
+                <i class="bi bi-people-fill"></i>
+                Customers
+            </a>
+
+
+            <a href="{{ url_for('purchase_history') }}">
+
+                <i class="bi bi-cart"></i>
+
+                <span>Purchase History</span>
+
+            </a>
+
+            <a href="#">
+                <i class="bi bi-box-seam"></i>
+                Products
+            </a>
+
+            <a href="#">
+                <i class="bi bi-cpu-fill"></i>
+                AI Prediction
+            </a>
+
+            <a href="#">
+                <i class="bi bi-chat-dots-fill"></i>
+                AI Messages
+            </a>
+
+            <a href="{{ url_for('notification.notifications_page') }}">
+                <i class="bi bi-bell"></i>
+                Notifications
+            </a>
+
+            <a href="#">
+                <i class="bi bi-graph-up-arrow"></i>
+                Analytics
+            </a>
+
+        </nav>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <a href="#">
+            <i class="bi bi-gear-fill"></i>
+            Settings
+        </a>
+
+        <a href="#">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+    <div class="search-box">
+
+        <i class="bi bi-search"></i>
+
+        <input
+            type="text"
+            placeholder="Search customers, products...">
+
+    </div>
+
+    <div class="topbar-right">
+
+        <div class="icon-btn">
+
+            <i class="bi bi-moon"></i>
+
+        </div>
+
+        <div class="icon-btn">
+
+            <i class="bi bi-bell"></i>
+
+        </div>
+
+        <div class="profile">
+
+            <div class="avatar">
+
+                A
+
+            </div>
+
+            <div>
+
+                <strong>Admin</strong>
+
+                <br>
+
+                <small>Administrator</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+        <section class="page-content">
+
+            {% block dashboard_content %}
+
+            {% endblock %}
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block page_js %}{% endblock %}
+
+
+{% endblock %}

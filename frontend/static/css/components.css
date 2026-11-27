@@ -1,0 +1,125 @@
+@import url("variables.css");
+
+/* ===========================
+        BUTTONS
+=========================== */
+
+.btn-primary-custom{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:12px 24px;
+
+    border-radius:12px;
+
+    transition:var(--transition);
+
+    font-weight:600;
+
+}
+
+.btn-primary-custom:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-2px);
+
+}
+
+/* ===========================
+        CARDS
+=========================== */
+
+.card-custom{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+}
+
+.card-custom:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* ===========================
+        INPUT
+=========================== */
+
+.input-custom{
+
+    width:100%;
+
+    height:54px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:0 18px;
+
+    font-size:15px;
+
+    transition:var(--transition);
+
+}
+
+.input-custom:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+/* ===========================
+        BADGES
+=========================== */
+
+.badge-success{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+}
+
+.badge-warning{
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+}
+
+.badge-danger{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+}

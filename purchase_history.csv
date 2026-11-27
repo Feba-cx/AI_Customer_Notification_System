@@ -1,0 +1,12 @@
+customer_id,product_name,category,purchase_date,quantity,amount
+1,Wireless Headphones,Electronics,2026-07-01,1,4999
+1,Smart Watch,Electronics,2026-07-15,1,7999
+1,Bluetooth Speaker,Electronics,2026-07-25,2,5998
+2,Running Shoes,Sports,2026-06-10,1,3500
+2,Sports T-Shirt,Sports,2026-07-05,2,2400
+3,Denim Jacket,Fashion,2026-06-20,1,4500
+3,Casual Shoes,Fashion,2026-07-18,1,3200
+4,Smartphone,Electronics,2026-07-02,1,24999
+4,Phone Case,Electronics,2026-07-20,1,999
+5,Yoga Mat,Fitness,2026-06-15,1,1500
+5,Water Bottle,Fitness,2026-07-10,2,1200
